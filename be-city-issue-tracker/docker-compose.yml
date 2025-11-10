@@ -1,7 +1,7 @@
 services:
   db:
     image: postgis/postgis:14-3.4 # Postgres + PostGIS image
-    container_name: citizen-tracker-db
+    container_name: city-issue-tracker-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
