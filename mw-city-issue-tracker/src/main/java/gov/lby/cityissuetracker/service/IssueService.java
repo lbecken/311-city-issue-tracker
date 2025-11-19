@@ -8,7 +8,7 @@ import gov.lby.cityissuetracker.entity.IssueCategory;
 import gov.lby.cityissuetracker.repository.IssueRepository;
 import gov.lby.cityissuetracker.exception.IssueNotFoundException;
 
-import gov.lby.cityissuetracker.messaging.IssueMessagePublisher;
+import gov.lby.cityissuetracker.event.IssueCreatedApplicationEvent;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +16,7 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -32,7 +33,7 @@ import java.util.UUID;
 public class IssueService {
 
     private final IssueRepository issueRepository;
-    private final IssueMessagePublisher messagePublisher;
+    private final ApplicationEventPublisher eventPublisher;
     private final GeometryFactory geometryFactory = new GeometryFactory(); // For creating Point objects
     
     public IssueResponse createIssue(CreateIssueRequest request) {
@@ -53,8 +54,8 @@ public class IssueService {
         
         Issue saved = issueRepository.save(issue);
 
-        // Publish event for async validation
-        messagePublisher.publishNewIssue(saved.getId());
+        // Publish Spring application event - RabbitMQ message will be sent after transaction commits
+        eventPublisher.publishEvent(new IssueCreatedApplicationEvent(this, saved.getId()));
 
         // Convert Entity to DTO
         return toResponse(saved);
