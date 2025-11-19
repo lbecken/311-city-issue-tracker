@@ -40,7 +40,7 @@ public class ImageService {
     public ImageResponse uploadImage(UUID issueId, MultipartFile file) throws IOException {
         // Verify issue exists
         if (!issueRepository.existsById(issueId)) {
-            throw new IssueNotFoundException(issueId);
+            throw new IssueNotFoundException("Issue not found: " + issueId);
         }
 
         // Validate file
@@ -68,7 +68,7 @@ public class ImageService {
     public List<ImageResponse> getImagesForIssue(UUID issueId) {
         // Verify issue exists
         if (!issueRepository.existsById(issueId)) {
-            throw new IssueNotFoundException(issueId);
+            throw new IssueNotFoundException("Issue not found: " + issueId);
         }
 
         return imageRepository.findByIssueIdOrderByCreatedAtAsc(issueId)
