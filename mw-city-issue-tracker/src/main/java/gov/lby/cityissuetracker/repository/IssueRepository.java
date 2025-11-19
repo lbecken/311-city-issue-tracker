@@ -35,8 +35,8 @@ public interface IssueRepository extends JpaRepository<Issue, UUID> {
     @Query(value = """
             SELECT i.* FROM issues i
             WHERE ST_DWithin(
-                i.location::geography,
-                :location::geography,
+                CAST(i.location AS geography),
+                CAST(:location AS geography),
                 :radiusMeters
             )
             AND i.category = :#{#category.name()}
