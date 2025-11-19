@@ -20,6 +20,21 @@
   gap: 10px;
   margin-top: 20px;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  margin: 24px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.button-spinner {
+  display: inline-block;
+  margin-right: 8px;
 }
 
 /* Style for map placeholder (before real map is added) */

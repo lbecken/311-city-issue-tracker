@@ -18,7 +18,7 @@
 }
 
 .table-container {
-  overflow-x: auto; /* Enable horizontal scroll on small screens */
+  overflow-x: auto;
   margin-bottom: 20px;
 }
 
@@ -42,4 +42,40 @@ mat-icon {
   text-align: center;
   padding: 40px;
   color: #666;
+}
+
+/* Image thumbnail styles */
+.images-cell {
+  display: flex;
+  align-items: center;
+}
+
+.image-preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.image-count {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: #3f51b5;
+  color: white;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.no-images {
+  color: #999;
+  font-style: italic;
 }
