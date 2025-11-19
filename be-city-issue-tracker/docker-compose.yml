@@ -14,7 +14,7 @@ services:
     #restart: unless-stopped
 
   rabbitmq:
-    image: rabbitmq:3.12-management
+    image: rabbitmq:4.0-management
     container_name: city-issue-tracker-rabbitmq
     ports:
       - "5672:5672"
