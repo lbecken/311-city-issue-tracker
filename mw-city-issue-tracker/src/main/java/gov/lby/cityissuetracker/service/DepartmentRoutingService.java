@@ -46,10 +46,10 @@ public class DepartmentRoutingService {
 
         try {
             ChatClient chatClient = chatClientBuilder.build();
-            String departmentName = chatClient.prompt(prompt).call().content();
+            String rawResponse = chatClient.prompt(prompt).call().content();
 
             // Clean up the response (remove quotes, extra whitespace)
-            departmentName = departmentName.trim().replaceAll("^\"|\"$", "");
+            final String departmentName = rawResponse.trim().replaceAll("^\"|\"$", "");
 
             log.info("AI routed issue '{}' to department: {}", title, departmentName);
 
