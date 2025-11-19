@@ -43,6 +43,8 @@ public class IssueService {
             .title(request.getTitle())
             .description(request.getDescription())
             .category(IssueCategory.valueOf(request.getCategory()))
+            .status(IssueStatus.REPORTED)
+            .priority(3) // Default priority
             .location(location)
             .address(request.getAddress())
             .reportedBy(request.getReportedBy())
